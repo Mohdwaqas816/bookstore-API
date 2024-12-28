@@ -17,6 +17,14 @@ app.use(express.json());
 // Logger custom middleware using morgan package
 app.use(loggerMiddleware);
 
+// ################# health route ###############################
+app.get('/api/health', (req, res) => {
+  res.status(200).json({
+    status: 'SUCCESS',
+    timestamp: new Date().toISOString(),
+  });
+});
+
 // ################  All Routes here ############################
 app.use('/api', bookRoutes);
 app.use('/api/user', userRoutes);

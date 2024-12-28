@@ -1,10 +1,17 @@
 const Book = require('../models/book');
 const getAllBooks = async (req, res) => {
   try {
-    const allBooks = await Book.find();
-    if (allBooks) {
+    const { limit, offset } = req.pagination;
+    const allBooks = await Book.find().skip(offset).limit(limit);
+    const totalBookCount = await Book.countDocuments();
+    if (allBooks.length > 0) {
       res.status(200).json({
         status: 'SUCCESS',
+        meta: {
+          totalItems: totalBookCount,
+          totalPages: Math.ceil(totalBookCount / limit),
+          currentPage: Math.ceil(offset / limit) + 1,
+        },
         data: allBooks,
       });
     } else {

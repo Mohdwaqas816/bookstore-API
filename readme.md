@@ -2,18 +2,16 @@
 
 **BookStore Api with Authentication** perform CRUD operation
 
-Categories : ---
+#### API routes Include
 
-- Trending Crypto News
-- Lifestyle and Shopping - Dubai Based (Coming soon...)
-- Financial (coming soon...)
-- Tech & Gadgets (coming soon...)
-- Editors Choice (coming soon...)
-
-Third party Api's : ---
-
-- Link: [CryptoNewsApi](https://cryptonews-api.com/documentation)
-- others (coming soon...)
+- User Registration
+- User login (JWT)
+- View all book
+- View single book
+- Add a book
+- Update book
+- delete book
+- others (Will be added soon...)
 
 ## Authors
 
@@ -21,13 +19,13 @@ Third party Api's : ---
 
 ## Tech Stack
 
-**Backend:** Nodejs, , Expressjs
+**Backend:** Nodejs, Expressjs <br>
 **Database:** MongoDB
 
 ## Pre-requisites
 
 <details open>
-<summary>JavaScript</summary>
+<summary>Nodejs</summary>
 <br>
 
 - [NodeJS Download](https://nodejs.org/en/download/package-manager)
@@ -48,11 +46,6 @@ Third party Api's : ---
 </details>
 
 <details open>
-<summary>Microsoft Visual Studio Build Tools</summary>
-<br>
-
-- [Build Tool Download](https://visualstudio.microsoft.com/downloads/)
-</details>
 
 ## Running project Locally
 
@@ -105,7 +98,7 @@ Local Folder Structure looks like
 ├── package.json
 ├── readme.md
 
--- Note:  Remember required files and place accordingly [env file]
+-- Note:  Remember required files and place accordingly [env file], don't forget to add environment variable like databaseURI, jwt_key, without this project will not going to run
 
 ```
 
@@ -121,4 +114,104 @@ Confirm by pasting this url in browser
   http://localhost:3000/api/health
 ```
 
-# Woyila! congrats 🎊🎊🎉
+## Woyila! congrats 🎊🎊🎉
+
+## API Reference
+
+# 1. User Authentication System:
+
+#### User register
+
+```http
+  POST /api/user/register
+```
+
+| Parameter   | Type       | Description                                                             |
+| :---------- | :--------- | :---------------------------------------------------------------------- |
+| `email`     | `string`   | **Required**. email of user                                             |
+| `firstName` | `string`   | **Required**. first name of user                                        |
+| `lastName`  | `string`   | **Required**. last name of user                                         |
+| `password`  | `string`   | **Required**. user password Length should be minimum of 8 and max of 25 |
+| `createdAt` | `Datetime` | **Optional** Default - current date time                                |
+
+#### User login
+
+```http
+  POST /api/user/login
+```
+
+| Parameter  | Type     | Description                 |
+| :--------- | :------- | :-------------------------- |
+| `email`    | `string` | **Required**. email of user |
+| `password` | `string` | **Required**. user password |
+
+### 😇 Remaining Authentication routes will be added soon...
+
+# 2. Bookstore API's:
+
+#### Retrieve all books
+
+```http
+  GET /api/books
+```
+
+#### Retrieve single book
+
+```http
+  GET /api/books/{bookId}
+```
+
+| Parameter | Type     | Description           |
+| :-------- | :------- | :-------------------- |
+| `id`      | `string` | **Required**. Book id |
+
+#### add a book
+
+```http
+  POST /api/books/
+```
+
+| Parameter   | Type       | Description                                                                                                    |
+| :---------- | :--------- | :------------------------------------------------------------------------------------------------------------- |
+| `title`     | `string`   | **Required**. Id of vendor to delete<br> **Max-length**. 100                                                   |
+| `author`    | `string`   | **Required**. Id of vendor to delete                                                                           |
+| `year`      | `Number`   | **Required**. book pulbished year <br> **Minimum**. 1000 <br> **Maximum**. Current Year, it can't be in future |
+| `createdAt` | `Datetime` | **Optional**. If not provided current datetime will be considered                                              |
+
+```
+example json
+
+{
+    "title": "Merchant of Venice",
+    "author": "William Shakespear",
+    "year": 1990
+}
+
+```
+
+#### update a book
+
+```http
+  PUT /api/books/{bookId}
+```
+
+parameters that you can update
+
+```
+example json
+
+{
+    "title": "Merchant of Venice",
+    "author": "William Shakespear",
+    "year": 1990
+}
+
+```
+
+#### delete a book
+
+```http
+  DELETE /api/books/{bookId}
+```
+
+## Rest documentation coming 🔜
